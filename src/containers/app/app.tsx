@@ -30,7 +30,7 @@ export class App extends Component<AppProps, {}> {
      this.formValue = {};
   }
 
-  handleEvent({ value }) {
+  handleEvent({ value }: Partial<{ type: string, value?: any}>) {
     this.formValue = value;
   }
 
