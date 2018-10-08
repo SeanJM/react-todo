@@ -1,0 +1,23 @@
+.todo-list {
+  padding: 10ux;
+}
+
+.todo-list_items {
+  list-style: none;
+  margin-top: 4ux;
+
+  li {
+    font-size: 18ux;
+    font-weight: bold;
+    letter-spacing: -5px;
+  }
+}
+
+.todo {
+  user-select: none;
+  cursor: default;
+}
+
+.todo--complete {
+  color: red;
+}

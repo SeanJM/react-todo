@@ -1,0 +1,28 @@
+.input-wrapper {
+  position: relative;
+  display: inline-block;
+  padding-top: 2ux;
+}
+
+.input-wrapper_placeholder {
+  color: grey;
+  font-size: 4ux;
+  font-weight: bold;
+  left: 0;
+  position: absolute;
+  top: 2ux;
+  line-height: $input-size;
+  transition: line-height 0.2s, font-size 0.2s, top 0.2s, color 0.2s;;
+  user-select: none;
+
+  .input-wrapper--content & {
+    font-size: 3ux;
+    line-height: 3ux;
+    top: 0;
+    color: black;
+  }
+}
+
+.input-wrapper_input {
+  position: relative;
+}
