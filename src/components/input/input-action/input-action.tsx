@@ -10,7 +10,7 @@ interface InputActionProps {
   onValue?: (e: InputValueEvent) => void;
 }
 
-export const InputAction = inputWrapper<InputActionProps>(function (props: InputActionProps) {
+function InputActionView(props: InputActionProps) {
   return (
     <div className="input-action">
       <input type="text"
@@ -27,4 +27,7 @@ export const InputAction = inputWrapper<InputActionProps>(function (props: Input
       {props.action}
     </div>
   );
-});
+}
+
+export const InputAction =
+  inputWrapper<InputActionProps>(InputActionView);
