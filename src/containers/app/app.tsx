@@ -1,10 +1,26 @@
 import React, { Component } from "react";
-import { InputAction } from "@components/input";
-import { withStore, StoreState } from "@store";
 import { dispatch } from "@action";
-import { FormValue, Form } from "@components/form";
+import { withStore, StoreState, StoreTodo } from "@store";
 
-export class App extends Component<StoreState, {}> {
+import { FormValue, Form } from "@components/form";
+import { InputAction } from "@components/input";
+import { TodoElement } from "@components/todo-element";
+
+interface AppProps {
+  complete: StoreTodo[];
+  incomplete: StoreTodo[];
+  total: number;
+}
+
+function mapStateToProps(state: StoreState): AppProps {
+  return {
+    complete: state.todos.filter(a => a.completed),
+    incomplete: state.todos.filter(a => !a.completed),
+    total: state.todos.length,
+  };
+}
+
+export class App extends Component<AppProps, {}> {
   formValue: FormValue<{
     todoAdd: string;
   }>;
@@ -22,7 +38,7 @@ export class App extends Component<StoreState, {}> {
     return (
       <div className="todo-list">
         <h2>Todos</h2>
-        <h1>{this.props.todos.filter(a => a.completed).length}/{this.props.todos.length}</h1>
+        <h1>{this.props.complete.length}/{this.props.total}</h1>
         <Form onValue={this}>
           <InputAction
             placeholder="Title"
@@ -38,32 +54,12 @@ export class App extends Component<StoreState, {}> {
           />
         </Form>
         <ul className="todo-list_items">
-          {
-            this.props.todos.map((todo) => {
-              const classList = ["todo"];
-              if (todo.completed) {
-                classList.push("todo--complete");
-              }
-              return (
-                <li
-                  className={classList.join(" ")}
-                  onClick={() => dispatch("TODO", {
-                    type: todo.completed ? "INCOMPLETE" : "COMPLETE",
-                    value: {
-                      id: todo.id
-                    }
-                  })}
-                  key={todo.id}
-                >
-                  {todo.title}
-                </li>
-              );
-            })
-          }
+          {this.props.complete.map((todo) => <TodoElement {...todo}/>)}
+          {this.props.incomplete.map((todo) => <TodoElement {...todo}/>)}
         </ul>
       </div>
     );
   }
 }
 
-export const AppConnect = withStore(App);
+export const AppConnect = withStore(App, mapStateToProps);
