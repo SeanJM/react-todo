@@ -42,7 +42,6 @@ export class Form extends React.Component<FormProps> {
     };
 
     this.formValue[e.name] = e.value;
-    console.log(formValueEvent);
     if (typeof this.props.onValue === "function") {
       this.props.onValue(formValueEvent);
     } else {
@@ -57,6 +56,10 @@ export class Form extends React.Component<FormProps> {
         {childrenList.map(child => {
           return React.cloneElement(child, {
             onValue: (e: InputValueEvent) => {
+              if (child.props.onValue) {
+                child.props.onValue(e);
+              }
+
               this.onValue({
                 ...e,
                 name: child.props.name,
