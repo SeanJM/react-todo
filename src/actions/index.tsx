@@ -13,8 +13,6 @@ subscribe("TODO", ({ type, value }) => {
         completed: false
       };
 
-      console.log(todo);
-
       todos.push(todo);
       store.setState({ todos });
 
