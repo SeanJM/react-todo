@@ -1,5 +1,13 @@
 @import "input-action/index";
+@import "input-add/index";
 
 input {
   background: none;
+  border: none;
+  font-size: $font-size;
+  height: $input-size;
+
+  &:focus {
+    outline: none;
+  }
 }

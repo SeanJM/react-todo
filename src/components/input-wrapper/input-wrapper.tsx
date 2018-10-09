@@ -6,9 +6,10 @@ interface InputWrapperInProps {
   onValue?: (e: InputValueEvent) => void;
   onFocus?: (e: React.FocusEvent) => void;
   onBlur?: (e: React.FocusEvent) => void;
+  [key: string]: any;
 }
 
-type InputWrapperOutProps<T> = T & InputWrapperInProps;
+export type InputWrapperProps<T> = T & InputWrapperInProps;
 
 interface InputWrapperState {
   hasFocus: boolean;
@@ -16,7 +17,7 @@ interface InputWrapperState {
 }
 
 export function inputWrapper<T = {}>(Component: React.ComponentType<InputWrapperInProps>) {
-  return class InputWrapperComponent extends React.Component<InputWrapperOutProps<T>, InputWrapperState> {
+  return class InputWrapperComponent extends React.Component<InputWrapperProps<T>, InputWrapperState> {
     constructor(props) {
       super(props);
       this.state = {
